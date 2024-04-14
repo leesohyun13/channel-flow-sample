@@ -2,7 +2,7 @@
 ChannelFlow and flow have difference purpose. Channels facilitate communication between coroutines, while Flows are more about efficient data production and distribution.
 ChannelFlow is based on Channels. 
 
-ChannelFlow is more slower than flow when they emit one more than flows
+1. ChannelFlow is more slower than flow when they emit one more than flows.
 ```
 val flows = channelFlow {
     launch {
@@ -23,6 +23,8 @@ flows.collect { data ->
     // Do something
 }
 ```
+
+2. ChannelFlow has default 64 buffers.
 
 But, ChannelFlows could produce data asynchronously and mange each scope independently. if it has several coroutines, you can cancel some of them. it dosen't matter for it. it is differenct from flow.
 
