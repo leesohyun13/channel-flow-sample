@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
+
 fun findAddress(timeoutMills: Long) = channelFlow<String> {
+    // first, get address
     val addressCollector = launch {
         getAddress().collect {
             delay(200)
@@ -18,6 +20,7 @@ fun findAddress(timeoutMills: Long) = channelFlow<String> {
     delay(timeoutMills)
     addressCollector.cancel()
 
+    // if it doesn't work, get current address
     val collector = launch {
         getCurrentAddress().collect {
             delay(100)
